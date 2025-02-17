@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Video Web Converter - Convert videos to different formats" />
+    <title>Video Web Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/@mantine/core@7.5.1/dist/styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="converter-card">
+        <h1>Video Converter</h1>
+        <form id="converter-form">
+          <div class="upload-section">
+              <label for="video-upload" class="upload-button">
+                  Select Videos
+                  <input type="file" id="video-upload" multiple accept=".mp4,.avi,.mov,.mkv,.webm,.mod,.mpeg,.mpg" hidden>
+              </label>
+              <div id="selected-files"></div>
+          </div>
+      
+          <div class="form-control">
+              <label for="format">Output Format</label>
+              <select id="format">
+                  <option value="mp4">MP4</option>
+                  <option value="avi">AVI</option>
+                  <option value="mov">MOV</option>
+                  <option value="webm">WebM</option>
+              </select>
+          </div>
+      
+          <div class="form-control">
+              <label for="quality">Quality</label>
+              <select id="quality">
+                  <option value="very low">Very Low</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high" selected="selected">High</option>
+                  <option value="very high">Very High</option>
+              </select>
+          </div>
+      
+          <div id="error" class="error"></div>
+      
+          <button type="submit" id="convert-button" class="convert-button" disabled>
+              Convert Videos
+          </button>
+        </form>      
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html> 

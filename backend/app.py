@@ -14,7 +14,7 @@ from utils.video_converter import VideoConverter
 
 app = Flask(__name__)
 config = Config()
-CORS(app)
+CORS(app, expose_headers=['X-Conversion-Results'])
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -142,7 +142,9 @@ def convert_video():
             memory_file,
             mimetype='application/zip',
             as_attachment=True,
-            download_name='converted_videos.zip'
+            download_name='converted_videos.zip',
+            max_age=0,
+            conditional=True
         )
         
         # Add conversion results to response headers

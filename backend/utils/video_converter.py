@@ -11,7 +11,7 @@ class VideoConverter:
     }
 
     @staticmethod
-    def convert_video(input_path: str, output_path: str, format: str, quality: str) -> bool:
+    def convert_video(input_path: str, output_path: str, format: str, quality: str) -> tuple[bool, str]:
         """
         Convert video using ffmpeg
         
@@ -24,12 +24,11 @@ class VideoConverter:
         Returns:
             bool: True if conversion successful, False otherwise
         """
-
         try:
             ffmpeg.input(input_path) \
                 .output(output_path, crf=VideoConverter.QUALITY_SETTINGS[quality]) \
                 .run(overwrite_output=True, quiet=False)
-            return True
+            return True, ""
         except ffmpeg.Error as e:
             error_message = f"FFmpeg error: {e.stderr.decode() if e.stderr else str(e)}"
             return False, error_message
