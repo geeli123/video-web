@@ -6,6 +6,6 @@ Users can upload videos and select the format they want to convert to, compressi
 ## Technologies
 
 - Python
-- Flask
-- React
+- Google Cloud Functions
+- HTML / JavaScript / CSS
 - ffmpeg

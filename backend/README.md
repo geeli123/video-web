@@ -2,7 +2,7 @@
 
 ```
 gcloud functions deploy convert-video \
-    --runtime python3.13 \
+    --runtime python312 \
     --trigger-http \
     --allow-unauthenticated \
     --memory 2048MB \

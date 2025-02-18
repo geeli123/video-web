@@ -1,5 +1,5 @@
 const config = {
-    API_URL: 'http://127.0.0.1:5000',
+    API_URL: 'https://us-central1-chuan-compute.cloudfunctions.net/convert_video',
     MAX_FILE_SIZE: 500 * 1024 * 1024, // 500MB
     ALLOWED_FORMATS: ['.mp4', '.avi', '.mov', '.mkv', '.webm', '.mod', '.mpeg', '.mpg']
 };
@@ -72,7 +72,7 @@ class VideoConverter {
 
         try {
             console.log('Sending request to API...');
-            const response = await fetch(`${config.API_URL}/api/convert`, {
+            const response = await fetch(`${config.API_URL}`, {
                 method: 'POST',
                 body: formData,
             });

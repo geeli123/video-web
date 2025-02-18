@@ -1,7 +1,6 @@
 import functions_framework
-from flask import jsonify, request
+from flask import jsonify, request, send_file
 from flask_cors import cross_origin
-from werkzeug.utils import secure_filename
 import uuid
 import zipfile
 import io
@@ -141,7 +140,6 @@ def convert_video(request):
                             })
                         
                     except Exception as e:
-                        print(f"Error processing {file.filename}: {str(e)}")
                         conversion_results.append({
                             'filename': file.filename,
                             'status': 'error',
@@ -159,16 +157,20 @@ def convert_video(request):
         memory_file.seek(0)
         
         # Create response with appropriate headers
-        response = jsonify({
-            'data': memory_file.getvalue().decode('latin1'),  # Encode binary data for JSON
-            'results': conversion_results
-        })
-        response.headers['Content-Type'] = 'application/json'
+        response = send_file(
+            memory_file,
+            mimetype='application/zip',
+            as_attachment=True,
+            download_name='converted_videos.zip',
+            max_age=0,
+            conditional=True
+        )
+        
+        # Add conversion results to response headers
         response.headers['X-Conversion-Results'] = json.dumps(conversion_results)
         return response
         
     except Exception as e:
-        print(f"Unexpected error: {str(e)}")
         return jsonify({
             'error': f'Conversion failed: {str(e)}',
             'results': conversion_results if 'conversion_results' in locals() else []
